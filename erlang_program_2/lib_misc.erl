@@ -1,5 +1,13 @@
 -module (lib_misc).
--export ([for/3, quicksort/1, pythag/1, perms/1, odds_and_evens1/1, odds_and_evens2/1]).
+-export ([
+	for/3, 
+	quicksort/1, 
+	pythag/1, 
+	perms/1, 
+	odds_and_evens1/1, 
+	odds_and_evens2/1,
+	count_characters/1,
+	count_characters/2]).
 
 for(Max, Max, F) -> [F(Max)];
 
@@ -40,4 +48,16 @@ odds_and_evens_cal([H|T], Odds, Evens) ->
 
 odds_and_evens_cal([], Odds, Evens) ->
 	{Odds, Evens}.
+
+count_characters(Str) ->
+	count_characters(Str, #{}).
+
+count_characters([H|T], #{ H := N }=X) ->
+	% io:format('ass map to X: X = ~w H = ~w N = ~w~n.', [X, H, N]),
+	count_characters(T, X#{ H := N + 1});
+count_characters([H|T], X) -> 
+	% io:format('create new character: X = ~w, H = ~w ~n.', [X, H]),
+	count_characters(T, X#{ H => 1 });
+count_characters([], X) ->
+	X.
 	
