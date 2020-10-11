@@ -1,6 +1,6 @@
--module (name_server).
+-module (name_server1).
 -export ([init/0, add/2, find/1, handle/2]).
--import (server1, [rpc/2]).
+-import (server3, [rpc/2]).
 
 
 add( Name, Place ) ->
