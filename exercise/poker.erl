@@ -5,6 +5,7 @@
 generate_poker(I) when I > 0 ->
 	V = I rem 13,
 	Result = if
+		I > 54 -> throw(poker_index_error);
 		I == 54 -> #poker{ index=54, value=54, num=54, selected=0, unselected=0 };
 		I == 53 -> #poker{ index=53, value=53, num=53, selected=0, unselected=0 };
 		I < 53 -> "next"
