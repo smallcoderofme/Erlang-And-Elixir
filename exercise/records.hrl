@@ -1,9 +1,9 @@
--record (poker, {index, value, num, selected, unselected}).
+-record (poker, {i, v, n, s, us}).
 -record (poker_type, { 
-		total=[],
-		single=[],
-		double=[],
-		triple=[],
-		quadruple=[],
-		jokers=[]
+		a=[],
+		s=[],
+		d=[],
+		t=[],
+		q=[],
+		j=[]
 	}).
