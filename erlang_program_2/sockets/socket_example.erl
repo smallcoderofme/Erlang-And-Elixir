@@ -2,7 +2,7 @@
 -export ([start_nano_server/0, nano_client_eval/1]).
 
 start_nano_server() -> 
-	{ ok, Listen } = gen_tcp:listen(2345, [binary, { packet, 0 }, { reuseaddr, true }, {active, true}]),
+	{ ok, Listen } = gen_tcp:listen(2345, [binary, { packet, 4 }, { reuseaddr, true }, {active, true}]),
 	{ ok, Socket } = gen_tcp:accept(Listen),
 	gen_tcp:close(Listen),
 	loop(Socket).
@@ -23,7 +23,7 @@ loop(Socket) ->
 
 
 nano_client_eval(Str) ->
-	{ ok, Socket } = gen_tcp:connect("localhost", 2345, [binary, {packet, 0}]),
+	{ ok, Socket } = gen_tcp:connect("localhost", 2345, [binary, {packet, 4}]),
 	ok = gen_tcp:send(Socket, term_to_binary(Str)),
 	receive
 		{ tcp, Socket, Bin } ->
