@@ -13,9 +13,10 @@ loop(Socket) ->
 			io:format("Server receive binary = ~p ~n", [Bin]),
 			Str = binary_to_term(Bin),
 			io:format("Server (unpacked) = ~p ~n", [Str]),
-			Reply = lib_misc: string2value(Str),
-			io:format("Server replying = ~p ~n", [Reply]),
-			gen_tcp:send(Socket, term_to_binary(Reply)),
+			% Reply = lib_misc: string2value(Str),
+			% io:format("Server replying = ~p ~n", [Reply]),
+			% gen_tcp:send(Socket, term_to_binary(Reply)),
+			gen_tcp:send(Socket, Bin),
 			loop(Socket);
 		{ tcp_passive, Socket} -> 
 			io:format("Server tcp_passive ~n"),

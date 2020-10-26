@@ -5,28 +5,28 @@ from struct import *
 # print(ret)
 # # {packet,4} 的意思是每个应用程序消息前部都有一个4字节的长度包头
 # # Echo client program
+# def encodeErl(strs):
+#     ret = '131,107,0,5'
+#     for char in strs:
+#         ret = ret + ","
+#         ret =ret + str(ord(char))
+#         pass
+#     ret = ret + ""
+#     return ret
+vaa = pack('BBBBBBBBB', 131,107,0,5,104,101,108,108,111)
+print(vaa)
+
+# print(len("hello"), 'B'*5)
 
 HOST = 'localhost'    # The remote host
 PORT = 2345              # The same port as used by the server
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-# now connect to the web server on port 80 - the normal http port
-s.connect((HOST, PORT))
-# packet = pack('lccccc', 131, 's', 'h', 'u', 'a', 'i')
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.connect((HOST, PORT))
+    s.sendall(vaa)
+    data = s.recv(1024)
 
+print(unpack('BBBBBBBBB',data))
 
-# s.close()
-def encodeErl(strs):
-	ret = '131,107,0,5'
-	for char in strs:
-		ret = ret + ","
-		ret =ret + str(ord(char))
-		pass
-	ret = ret + ""
-	return ret
-ret = encodeErl("hello")
-print(ret)
-s.sendall(ret.encode("utf-8"))
-print(ret)
 
 
 
