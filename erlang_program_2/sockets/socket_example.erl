@@ -17,6 +17,9 @@ loop(Socket) ->
 			io:format("Server replying = ~p ~n", [Reply]),
 			gen_tcp:send(Socket, term_to_binary(Reply)),
 			loop(Socket);
+		{ tcp_passive, Socket} -> 
+			io:format("Server tcp_passive ~n"),
+			loop(Socket);
 		{ tcp_closed, Socket} -> 
 			io:format("Server socket closed. ~n")
 	end.
