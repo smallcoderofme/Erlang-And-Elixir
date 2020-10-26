@@ -6,22 +6,26 @@ from struct import *
 # # {packet,4} 的意思是每个应用程序消息前部都有一个4字节的长度包头
 # # Echo client program
 
-# HOST = 'localhost'    # The remote host
-# PORT = 2345              # The same port as used by the server
-# s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-# # now connect to the web server on port 80 - the normal http port
-# s.connect((HOST, PORT))
-# # packet = pack('lccccc', 131, 's', 'h', 'u', 'a', 'i')
+HOST = 'localhost'    # The remote host
+PORT = 2345              # The same port as used by the server
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# now connect to the web server on port 80 - the normal http port
+s.connect((HOST, PORT))
+# packet = pack('lccccc', 131, 's', 'h', 'u', 'a', 'i')
 
-# s.sendall(b'hello')
+
 # s.close()
-def encode(str):
-	ret = ''
-	for char in str:
-		ret +=ord(char)
+def encodeErl(strs):
+	ret = '131,107,0,5'
+	for char in strs:
+		ret = ret + ","
+		ret =ret + str(ord(char))
 		pass
+	ret = ret + ""
 	return ret
-ret = encode("hello")
+ret = encodeErl("hello")
+print(ret)
+s.sendall(ret.encode("utf-8"))
 print(ret)
 
 
