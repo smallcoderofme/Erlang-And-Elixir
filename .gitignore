@@ -1,6 +1,3 @@
 ezwebframe/
 project/rebar3
 *.beam
-erlang_program_2/sockets/client.py
-erlang_program_2/sockets/server.py
-erlang_program_2/sockets/tcp_packet.py
