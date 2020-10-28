@@ -46,14 +46,15 @@ terminate(_Reason, _N) ->
 code_change(_OldVsn, N, _Extra) -> {ok, N}.
 
 make_new_prime(K) ->
+    io:format("make_new_prime: ~w ~n", [K]),
     if
-	K > 100 ->
-	    alarm_handler:set_alarm(tooHot),
-	    N = lib_primes:make_prime(K),
-	    alarm_handler:clear_alarm(tooHot),
-	    N;
-	true ->
-	    lib_primes:make_prime(K)
+    	K > 100 ->
+    	    alarm_handler:set_alarm(tooHot),
+    	    N = lib_primes:make_prime(K),
+    	    alarm_handler:clear_alarm(tooHot),
+    	    N;
+    	true ->
+    	    lib_primes:make_prime(K)
     end.
 
     
