@@ -1,3 +1,4 @@
 ezwebframe/
 project/rebar3
 *.beam
+logs/
