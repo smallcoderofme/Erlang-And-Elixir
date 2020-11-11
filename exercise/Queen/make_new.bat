@@ -1,0 +1,3 @@
+erl -make
+
+pause
