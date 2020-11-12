@@ -98,9 +98,7 @@ handle_cast(Msg, State) ->
 handle_info({inet_async, LSock, Ref, {ok, Sock}}, State = #state{socket=LSock, ref=Ref}) ->
 	case set_sockopt(LSock, Sock) of
 		ok -> ok;
-		{error, Reason} -> 
-			io:format("=================Format0"),
-			exit({set_sockopt, Reason})
+		{error, Reason} -> exit({set_sockopt, Reason})
 	end,
     {ok, Child} = supervisor:start_child(client_sup, [Sock]),
 	ok = gen_tcp:controlling_process(Sock, Child),
@@ -116,11 +114,9 @@ set_sockopt(LSock, Sock) ->
 			case prim_inet:setopts(Sock, Opts) of
 				ok -> ok;
 				Error -> gen_tcp:close(Sock),
-						io:format("=================Format1"),
 						Error
 			end;
 		Error ->
-			io:format("=================Format2"),
 			gen_tcp:close(Sock),
 			Error
 	end.

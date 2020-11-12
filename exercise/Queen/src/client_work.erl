@@ -35,8 +35,8 @@ init(Socket) ->
 	async_recv(Socket, 0, 9000),
     {ok, #state{socket = Socket}}.
 
-async_recv(Sock, _Length, Timeout) when is_port(Sock) ->
-	case prim_inet:async_accept(Sock, Timeout) of
+async_recv(Sock, Length, Timeout) when is_port(Sock) ->
+	case prim_inet:async_recv(Sock, Length, Timeout) of
 		{error, Reason} -> throw({Reason});
 		{ok, Res} -> Res;
 		Res -> Res
