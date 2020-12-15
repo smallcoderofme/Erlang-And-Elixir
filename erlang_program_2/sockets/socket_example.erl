@@ -22,7 +22,8 @@ loop(Socket) ->
 			io:format("Server tcp_passive ~n"),
 			loop(Socket);
 		{ tcp_closed, Socket} -> 
-			io:format("Server socket closed. ~n")
+			io:format("Server socket closed. ~n"),
+			loop(Socket)
 	end.
 
 
