@@ -3,7 +3,7 @@
 
 -define (NAME, code_lock).
 
--export ([start_link/1]).
+-export ([start_link/1, stop/0]).
 -export ([button/1]).
 -export ([init/1, callback_mode/0, terminate/3]).
 -export ([locked/3, open/3]).
@@ -12,7 +12,11 @@ start_link(Code) ->
 	gen_statem:start_link({local, ?NAME}, ?MODULE, Code, []).
 
 
+stop() ->
+	gen_statem:stop(?NAME).
+
 button(Button) ->
+	io:format("push Button.~n"),
 	gen_statem:cast(?NAME, {button, Button}).
 
 
@@ -24,14 +28,19 @@ init(Code) ->
 callback_mode() ->
 	state_functions.
 
+% locked(cast, stop) ->
+% 	io:format("locked stop."),
+% 	ok.
+
 locked(cast, {button, Button},
 	#{code := Code, length := Length, buttons := Buttons} = Data) ->
+	io:format("push Button locked.~n"),
 	NewButtons = 
 	if
 		length(Buttons) < Length ->
 			Buttons;
 		true ->
-			tl(Buttons) %% 返回列表的最后一个元素
+			tl(Button) %% 返回列表的最后一个元素
 	end 
 	++ [Buttons],
 	if
