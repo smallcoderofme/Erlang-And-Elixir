@@ -1,0 +1,4 @@
+﻿Pid_send = pid_send_test:start().
+{_, Pid} = Pid_send.
+is_process_alive(Pid).
+Pid ! {send, "Hello, Gen_Server"}.
