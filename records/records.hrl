@@ -1,0 +1,1 @@
+-record (inc, {some_field, some_defult = "yeah!", unimaginative_name}).
